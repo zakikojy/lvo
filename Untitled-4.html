@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Love Loading and Main Menu</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #000;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+  /* Loading screen styles */
+  #loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+  }
+  .heart {
+    position: relative;
+    width: 200px;
+    height: 180px;
+    background-color: #e91e63;
+    transform: rotate(-45deg);
+    animation: pulse 2s infinite ease-in-out;
+    box-shadow:
+      0 0 20px #e91e63,
+      0 0 40px #e91e63,
+      0 0 60px #e91e63,
+      0 0 80px #e91e63,
+      0 0 100px #e91e63;
+    margin-bottom: 20px;
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 180px;
+    background-color: #e91e63;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -100px;
+    left: 0;
+  }
+  .heart::after {
+    top: 0;
+    right: -100px;
+  }
+  @keyframes pulse {
+    0%, 100% {
+      transform: rotate(-45deg) scale(1);
+      box-shadow:
+        0 0 20px #e91e63,
+        0 0 40px #e91e63,
+        0 0 60px #e91e63,
+        0 0 80px #e91e63,
+        0 0 100px #e91e63;
+    }
+    50% {
+      transform: rotate(-45deg) scale(1.15);
+      box-shadow:
+        0 0 40px #ff4081,
+        0 0 60px #ff4081,
+        0 0 80px #ff4081,
+        0 0 100px #ff4081,
+        0 0 120px #ff4081;
+    }
+  }
+
+  /* Main menu styles */
+  #main-menu {
+    display: none;
+    text-align: center;
+    padding: 20px;
+  }
+  #main-menu h1 {
+    margin: 20px 0;
+  }
+  #main-menu img {
+    width: 200px;
+    height: auto;
+  }
+  #btn_mau, #btn_gamau {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #e91e63;
+    transition: background-color 0.3s ease;
+    position: relative;
+  }
+  #btn_mau:hover, #btn_gamau:hover {
+    background-color: #ad1457;
+  }
+  #btn_gamau {
+    position: absolute;
+  }
+</style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="heart"></div>
+    <div>Loading...</div>
+  </div>
+
+  <!-- Main Menu -->
+  <div id="main-menu">
+    <h1>Hai Cantik ku!</h1>
+    <img src="https://c.tenor.com/Z8ezUHZzcLoAAAAC/love.gif" alt="Love Gif" />
+    <h1>Will you be my lover?</h1>
+    <button id="btn_mau" onclick="alert('I LOVE YOU')">Mau</button>&nbsp;
+    <button id="btn_gamau" onclick="gamau(this)" style="position: absolute">
+      Gamau
+    </button>
+  </div>
+
+  <script>
+    // Function for moving "Gamau" button randomly
+    function gamau(id) {
+      var mau = document.getElementById("btn_mau");
+      var i = Math.floor(Math.random() * (window.innerWidth - id.offsetWidth));
+      var j = Math.floor(Math.random() * (window.innerHeight - id.offsetHeight));
+      id.style.left = i + "px";
+      id.style.top = j + "px";
+    }
+
+    // After 4 seconds, hide loading screen and show main menu
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('main-menu').style.display = 'block';
+      }, 4000);
+    };
+  </script>
+</body>
+</html>
